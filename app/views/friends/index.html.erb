@@ -1,0 +1,37 @@
+<%if employee_signed_in? %>
+<table class ="table">
+  <thead class="table-dark">
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Phone</th>
+      <th>Twitter</th>
+      <th>User ID</th>
+      <th> </th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @friends.each do |friend| %>
+      <%if friend.employee == current_employee%>
+      <tr>
+        <td><%= link_to friend.first_name + ' ' + friend.last_name, friend %></td>
+        <td><%= friend.email %></td>
+        <td><%= friend.phone %></td>
+        <td><%= friend.Twitter %></td>
+        <td><%= friend.employee_id %></td>
+        <td><%= link_to 'Delete', friend, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-outline-danger btn-sm" %></td>
+      </tr>
+      <%end%>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Friend', new_friend_path,class:"btn btn-secondary" %>
+<%else %>
+	<h1>Salame</h1>
+	<p>Find me in app/views/home/index.html.erb</p>
+
+<%end%>
